@@ -3,7 +3,8 @@
 import gi
 
 gi.require_version("Gtk", "3.0")
-from gi.repository import Gtk, Pango
+from gi.repository import Gtk, Pango, GdkPixbuf
+import os
 
 
 class WelcomePage(Gtk.Box):
@@ -16,8 +17,15 @@ class WelcomePage(Gtk.Box):
         self.set_margin_end(60)
 
         # Logo
-        logo = Gtk.Label(label="⚡")
-        logo.set_markup('<span size="72000">⚡</span>')
+        try:
+            base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+            logo_path = os.path.join(base_dir, "theme", "logo.svg")
+            pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_scale(logo_path, 96, 96, True)
+            logo = Gtk.Image.new_from_pixbuf(pixbuf)
+        except Exception:
+            logo = Gtk.Image.new_from_icon_name("system-software-install-symbolic", Gtk.IconSize.DIALOG)
+            logo.set_pixel_size(72)
+
         logo.get_style_context().add_class("welcome-logo")
         self.pack_start(logo, False, False, 0)
 
@@ -53,18 +61,19 @@ class WelcomePage(Gtk.Box):
         self.pack_start(features_box, False, False, 0)
 
         features = [
-            ("🖥️", "3 Masaüstü", "XFCE, Hyprland, GNOME"),
-            ("📦", "AUR Desteği", "yay hazır kurulu"),
-            ("🚀", "Minimal", "Düşük RAM kullanımı"),
+            ("computer-symbolic", "3 Masaüstü", "XFCE, Hyprland, GNOME"),
+            ("package-x-generic-symbolic", "AUR Desteği", "yay hazır kurulu"),
+            ("applications-system-symbolic", "Minimal", "Düşük RAM kullanımı"),
         ]
-        for icon, title_text, desc in features:
+        for icon_name, title_text, desc in features:
             card = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=4)
             card.get_style_context().add_class("card")
             card.set_size_request(160, -1)
 
-            icon_lbl = Gtk.Label()
-            icon_lbl.set_markup(f'<span size="24000">{icon}</span>')
-            card.pack_start(icon_lbl, False, False, 4)
+            img = Gtk.Image.new_from_icon_name(icon_name, Gtk.IconSize.DIALOG)
+            img.set_pixel_size(32)
+            img.set_margin_bottom(8)
+            card.pack_start(img, False, False, 4)
 
             t = Gtk.Label()
             t.set_markup(

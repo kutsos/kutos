@@ -43,7 +43,7 @@ class DiskPage(Gtk.Box):
 
         # Auto card
         self.auto_card = self._create_mode_card(
-            "🔄",
+            "view-refresh-symbolic",
             "Otomatik",
             "Tüm diski kullanarak otomatik bölümlendir.\nEFI + Root + Swap oluşturulur.",
             True,
@@ -53,7 +53,7 @@ class DiskPage(Gtk.Box):
 
         # Manual card
         self.manual_card = self._create_mode_card(
-            "🛠️",
+            "preferences-system-symbolic",
             "Manuel (GParted)",
             "GParted ile disk bölümlerini kendiniz yönetin.\nİleri düzey kullanıcılar için.",
             False,
@@ -86,7 +86,7 @@ class DiskPage(Gtk.Box):
         scroll.add(self.disk_list_box)
 
         # GParted button (hidden initially)
-        self.gparted_btn = Gtk.Button(label="🛠️  GParted'i Aç")
+        self.gparted_btn = Gtk.Button(label="GParted'i Aç")
         self.gparted_btn.get_style_context().add_class("btn-secondary")
         self.gparted_btn.connect("clicked", self._on_gparted)
         self.gparted_btn.set_halign(Gtk.Align.START)
@@ -135,7 +135,7 @@ class DiskPage(Gtk.Box):
         self.warning = Gtk.Label(xalign=0)
         self.warning.set_markup(
             '<span foreground="#ecc94b" size="small">'
-            "⚠️  Otomatik mod seçilen diskteki TÜM verileri silecektir!"
+            "UYARI: Otomatik mod seçilen diskteki TÜM verileri silecektir!"
             "</span>"
         )
         self.warning.set_margin_top(8)
@@ -151,8 +151,8 @@ class DiskPage(Gtk.Box):
             card.get_style_context().add_class("selected")
         card.set_size_request(-1, 100)
 
-        icon_lbl = Gtk.Label()
-        icon_lbl.set_markup(f'<span size="20000">{icon}</span>')
+        icon_lbl = Gtk.Image.new_from_icon_name(icon, Gtk.IconSize.DIALOG)
+        icon_lbl.set_pixel_size(32)
         card.pack_start(icon_lbl, False, False, 4)
 
         t = Gtk.Label()
@@ -227,8 +227,7 @@ class DiskPage(Gtk.Box):
                 box.set_margin_top(2)
                 box.set_margin_bottom(2)
 
-                icon = Gtk.Label()
-                icon.set_markup('<span size="18000">💾</span>')
+                icon = Gtk.Image.new_from_icon_name("drive-harddisk-symbolic", Gtk.IconSize.LARGE_TOOLBAR)
                 box.pack_start(icon, False, False, 8)
 
                 info = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=2)

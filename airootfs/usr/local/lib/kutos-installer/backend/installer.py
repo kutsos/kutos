@@ -83,7 +83,7 @@ def run_installation(config, progress_cb, log_cb, done_cb):
         log_cb("[PACSTRAP] Temel paketler kuruluyor...")
 
         base_pkgs = list(BASE_PACKAGES)
-        cmd = ["pacstrap", "-K", MOUNT_POINT] + base_pkgs
+        cmd = ["pacstrap", "-K", "-c", MOUNT_POINT] + base_pkgs
         _run_cmd(cmd, log_cb)
         log_cb("[PACSTRAP] Temel sistem kuruldu.")
 
@@ -107,7 +107,7 @@ def run_installation(config, progress_cb, log_cb, done_cb):
         de_pkgs = get_de_packages(de)
         log_cb(f"[DE] {de.upper()} paketleri kuruluyor: {', '.join(de_pkgs[:5])}...")
 
-        cmd = ["arch-chroot", MOUNT_POINT, "pacman", "-S", "--noconfirm", "--needed"] + de_pkgs
+        cmd = ["arch-chroot", MOUNT_POINT, "pacman", "-S", "--noconfirm", "--needed", "--noprogressbar"] + de_pkgs
         _run_cmd(cmd, log_cb)
         log_cb(f"[DE] {de.upper()} kuruldu.")
 
@@ -118,29 +118,29 @@ def run_installation(config, progress_cb, log_cb, done_cb):
             log_cb(f"[PKG] {len(extras)} ek paket kuruluyor...")
             cmd = [
                 "arch-chroot", MOUNT_POINT,
-                "pacman", "-S", "--noconfirm", "--needed",
+                "pacman", "-S", "--noconfirm", "--needed", "--noprogressbar"
             ] + extras
             _run_cmd(cmd, log_cb)
         else:
             advance("Ek paketler...", "Seçilmedi, atlanıyor")
             log_cb("[PKG] Ek paket seçilmedi, atlanıyor.")
 
-        # === Step 8: yay (AUR Helper) ===
-        advance("yay kuruluyor...", "AUR helper")
+        # === Step 8: User Creation ===
         username = config.get("username", "kutos")
-        install_yay(MOUNT_POINT, username, log_cb)
-
-        # === Step 9: GRUB Bootloader ===
-        advance("Bootloader kuruluyor...", "GRUB")
-        disk = config.get("disk", "")
-        configure_grub(MOUNT_POINT, disk, is_uefi, log_cb)
-
-        # === Step 10: User & Services ===
-        advance("Kullanıcı ve servisler yapılandırılıyor...", "Son adım")
+        advance("Kullanıcı oluşturuluyor...", username)
         password = config.get("password", "")
         sudo = config.get("sudo", True)
         root_same = config.get("root_same_password", True)
         create_user(MOUNT_POINT, username, password, sudo, root_same, log_cb)
+
+        # === Step 9: yay (AUR Helper) ===
+        advance("yay kuruluyor...", "AUR helper")
+        install_yay(MOUNT_POINT, username, log_cb)
+
+        # === Step 10: Bootloader & Services ===
+        advance("Sistem yapılandırılıyor...", "Bootloader ve Servisler")
+        disk = config.get("disk", "")
+        configure_grub(MOUNT_POINT, disk, is_uefi, log_cb)
 
         de_dm = {"xfce": "lightdm", "hyprland": "sddm", "gnome": "gdm"}
         dm = de_dm.get(de, "lightdm")

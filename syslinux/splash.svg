@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 480" width="640" height="480">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="50%" stop-color="#1e293b"/>
+      <stop offset="100%" stop-color="#0f172a"/>
+    </linearGradient>
+    <linearGradient id="kGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#637bbd"/>
+      <stop offset="100%" stop-color="#4d6199"/>
+    </linearGradient>
+    <linearGradient id="kShadow" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#000000" stop-opacity="0.2"/>
+        <stop offset="100%" stop-color="#000000" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+  
+  <rect width="640" height="480" fill="url(#bg)"/>
+  
+  <g opacity="0.1">
+    <g transform="translate(150, 40) scale(1.6)">
+        <polygon points="65,100 135,30 170,30 65,135" fill="#ffffff" />
+        <polygon points="100,100 170,170 135,170 65,100" fill="#ffffff" />
+        <rect x="30" y="30" width="35" height="140" fill="#ffffff" />
+    </g>
+  </g>
+
+  <g transform="translate(400, 30) scale(0.6)">
+    <g transform="translate(4, 4)" fill="url(#kShadow)">
+      <rect x="30" y="30" width="35" height="140" />
+      <polygon points="65,100 135,30 170,30 65,135" />
+      <polygon points="100,100 170,170 135,170 65,100" />
+    </g>
+    <g fill="url(#kGradient)">
+      <rect x="30" y="30" width="35" height="140" />
+      <polygon points="65,100 135,30 170,30 65,135" />
+      <polygon points="100,100 170,170 135,170 65,100" />
+    </g>
+  </g>
+
+  <g transform="translate(560, 110)" text-anchor="middle" font-family="'DejaVu Sans', sans-serif">
+    <text y="0" font-size="28" font-weight="bold" fill="#f1f5f9" letter-spacing="3">KutOS</text>
+  </g>
+  
+  <g transform="translate(320, 450)" text-anchor="middle" font-family="'DejaVu Sans', sans-serif">
+    <text y="0" font-size="12" font-weight="normal" fill="#94a3b8" letter-spacing="1">Minimal Arch Linux Environment</text>
+  </g>
+
+</svg>

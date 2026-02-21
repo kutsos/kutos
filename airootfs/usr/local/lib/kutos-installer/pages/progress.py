@@ -68,7 +68,7 @@ class ProgressPage(Gtk.Box):
         self.complete_box.set_no_show_all(True)
         self.pack_start(self.complete_box, False, False, 0)
 
-        self.reboot_btn = Gtk.Button(label="🔄  Yeniden Başlat")
+        self.reboot_btn = Gtk.Button(label="Yeniden Başlat")
         self.reboot_btn.get_style_context().add_class("btn-primary")
         self.reboot_btn.connect("clicked", self._on_reboot)
         self.complete_box.pack_start(self.reboot_btn, False, False, 0)
@@ -119,7 +119,7 @@ class ProgressPage(Gtk.Box):
         if success:
             self.title.set_markup(
                 '<span font_weight="bold" size="20000" foreground="#48bb78">'
-                "✅ Kurulum Tamamlandı!"
+                "Kurulum Başarıyla Tamamlandı!"
                 "</span>"
             )
             self.phase_label.set_text("Sistem başarıyla kuruldu.")
@@ -131,7 +131,7 @@ class ProgressPage(Gtk.Box):
         else:
             self.title.set_markup(
                 '<span font_weight="bold" size="20000" foreground="#fc8181">'
-                "❌ Kurulum Başarısız!"
+                "Kurulum Başarısız!"
                 "</span>"
             )
             self.phase_label.set_text("Bir hata oluştu.")

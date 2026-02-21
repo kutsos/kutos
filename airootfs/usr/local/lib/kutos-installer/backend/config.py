@@ -144,9 +144,17 @@ def install_yay(mount_point, username, log_cb):
         f.write("cd /tmp\n")
         f.write("git clone https://aur.archlinux.org/yay-bin.git\n")
         f.write("cd yay-bin\n")
-        f.write("makepkg -si --noconfirm\n")
+        # Ensure makepkg doesn't freeze waiting for sudo password
+        f.write("export MAKEFLAGS='-j$(nproc)'\n")
+        f.write("makepkg -si --noconfirm --needed\n")
         f.write("cd /tmp && rm -rf yay-bin\n")
     os.chmod(build_script, 0o755)
+
+    # Temporarily allow passwordless sudo for the user to prevent makepkg from freezing
+    sudoers_tmp = os.path.join(mount_point, "etc", "sudoers.d", "99-installer-yay")
+    with open(sudoers_tmp, "w") as f:
+        f.write(f"{username} ALL=(ALL) NOPASSWD: ALL\n")
+    os.chmod(sudoers_tmp, 0o440)
 
     # Run as the created user (makepkg won't run as root)
     _chroot(
@@ -155,9 +163,10 @@ def install_yay(mount_point, username, log_cb):
         log_cb,
     )
 
-    # Cleanup
+    # Cleanup temporary script and sudoers
     try:
         os.remove(build_script)
+        os.remove(sudoers_tmp)
     except Exception:
         pass
 

@@ -8,7 +8,7 @@ from gi.repository import Gtk
 
 PACKAGE_GROUPS = [
     {
-        "name": "🌐 İnternet",
+        "name": "İnternet",
         "packages": [
             ("firefox", "Firefox Web Tarayıcı", True),
             ("chromium", "Chromium Tarayıcı", False),
@@ -17,7 +17,7 @@ PACKAGE_GROUPS = [
         ],
     },
     {
-        "name": "📝 Ofis & Üretkenlik",
+        "name": "Ofis &amp; Üretkenlik",
         "packages": [
             ("libreoffice-fresh", "LibreOffice Paketi", False),
             ("evince", "PDF Görüntüleyici", True),
@@ -25,7 +25,7 @@ PACKAGE_GROUPS = [
         ],
     },
     {
-        "name": "🎨 Medya & Grafik",
+        "name": "Medya &amp; Grafik",
         "packages": [
             ("vlc", "VLC Medya Oynatıcı", False),
             ("gimp", "GIMP Görüntü Düzenleyici", False),
@@ -34,7 +34,7 @@ PACKAGE_GROUPS = [
         ],
     },
     {
-        "name": "💻 Geliştirme",
+        "name": "Geliştirme",
         "packages": [
             ("code", "Visual Studio Code (OSS)", False),
             ("docker", "Docker Container Engine", False),
@@ -45,7 +45,7 @@ PACKAGE_GROUPS = [
         ],
     },
     {
-        "name": "🎮 Oyun & Eğlence",
+        "name": "Oyun &amp; Eğlence",
         "packages": [
             ("steam", "Steam Oyun Platformu", False),
             ("lutris", "Lutris Oyun Yöneticisi", False),
@@ -53,10 +53,10 @@ PACKAGE_GROUPS = [
         ],
     },
     {
-        "name": "🔧 Sistem Araçları",
+        "name": "Sistem Araçları",
         "packages": [
             ("htop", "htop Süreç İzleyici", True),
-            ("neofetch", "Neofetch Sistem Bilgisi", True),
+            ("fastfetch", "Fastfetch Sistem Bilgisi", True),
             ("timeshift", "Timeshift Yedekleme", False),
             ("flatpak", "Flatpak Paket Yöneticisi", False),
             ("bluez", "Bluetooth Desteği", False),

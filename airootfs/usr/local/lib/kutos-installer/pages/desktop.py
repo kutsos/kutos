@@ -11,7 +11,7 @@ DE_OPTIONS = [
         "id": "xfce",
         "name": "XFCE",
         "type": "X11 • Geleneksel",
-        "icon": "🖥️",
+        "icon": "computer-symbolic",
         "desc": "Hafif, kararlı ve özelleştirilebilir masaüstü.\n"
         "Düşük kaynak tüketimi, eski donanıma uygun.\n"
         "~300MB RAM kullanımı.",
@@ -22,7 +22,7 @@ DE_OPTIONS = [
         "id": "hyprland",
         "name": "Hyprland",
         "type": "Wayland • Tiling WM",
-        "icon": "🌊",
+        "icon": "preferences-system-windows-symbolic",
         "desc": "Modern, animasyonlu Wayland tiling compositor.\n"
         "Yüksek performans, güçlü özelleştirme.\n"
         "Klavye odaklı iş akışı.",
@@ -33,7 +33,7 @@ DE_OPTIONS = [
         "id": "gnome",
         "name": "GNOME",
         "type": "Wayland • Modern DE",
-        "icon": "🎨",
+        "icon": "user-desktop-symbolic",
         "desc": "Modern, sade ve kullanıcı dostu masaüstü.\n"
         "Dokunmatik ekran desteği, entegre uygulamalar.\n"
         "Daha yüksek kaynak kullanımı.",
@@ -79,9 +79,6 @@ class DesktopPage(Gtk.Box):
             card = self._create_de_card(de)
             self.cards_box.pack_start(card, True, True, 0)
 
-        # Select XFCE by default
-        self._select_de("xfce")
-
         # Details panel
         self.details_box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=8)
         self.details_box.get_style_context().add_class("summary-section")
@@ -100,7 +97,8 @@ class DesktopPage(Gtk.Box):
         self.detail_ram.get_style_context().add_class("info-text")
         self.details_box.pack_start(self.detail_ram, False, False, 0)
 
-        self._update_details("xfce")
+        # Select XFCE by default
+        self._select_de("xfce")
 
     def _create_de_card(self, de):
         event = Gtk.EventBox()
@@ -111,8 +109,8 @@ class DesktopPage(Gtk.Box):
         card.set_halign(Gtk.Align.CENTER)
         card.set_valign(Gtk.Align.CENTER)
 
-        icon = Gtk.Label()
-        icon.set_markup(f'<span size="36000">{de["icon"]}</span>')
+        icon = Gtk.Image.new_from_icon_name(de["icon"], Gtk.IconSize.DIALOG)
+        icon.set_pixel_size(48)
         card.pack_start(icon, False, False, 4)
 
         type_lbl = Gtk.Label(label=de["type"])

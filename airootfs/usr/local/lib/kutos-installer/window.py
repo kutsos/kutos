@@ -3,7 +3,8 @@
 import gi
 
 gi.require_version("Gtk", "3.0")
-from gi.repository import Gtk, GLib
+from gi.repository import Gtk, GLib, GdkPixbuf
+import os
 
 from pages.welcome import WelcomePage
 from pages.disk import DiskPage
@@ -25,15 +26,15 @@ STEPS = [
 ]
 
 
-class InstallerWindow(Gtk.ApplicationWindow):
-    def __init__(self, **kwargs):
-        super().__init__(
-            title="KutOS Installer",
-            default_width=960,
-            default_height=640,
-            **kwargs,
-        )
+class InstallerWindow(Gtk.Window):
+    def __init__(self, application=None):
+        super().__init__(title="KutOS Kurulumu")
+        self.set_default_size(900, 600)
         self.set_position(Gtk.WindowPosition.CENTER)
+        self.maximize()
+        
+        # Load custom CSS
+        self.get_style_context().add_class("main-window")
         self.set_resizable(True)
 
         self.config = {
@@ -55,10 +56,21 @@ class InstallerWindow(Gtk.ApplicationWindow):
         self.add(main_box)
 
         # Header
-        header = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL)
+        header = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=6)
         header.get_style_context().add_class("header-bar")
+        header.set_valign(Gtk.Align.CENTER)
 
-        logo_label = Gtk.Label(label="⚡ KutOS")
+        # Vector Logo
+        try:
+            base_dir = os.path.dirname(os.path.abspath(__file__))
+            logo_path = os.path.join(base_dir, "theme", "logo.svg")
+            pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_scale(logo_path, 24, 24, True)
+            logo_img = Gtk.Image.new_from_pixbuf(pixbuf)
+            header.pack_start(logo_img, False, False, 0)
+        except Exception:
+            pass
+
+        logo_label = Gtk.Label(label="KutOS")
         logo_label.get_style_context().add_class("header-title")
         header.pack_start(logo_label, False, False, 0)
 
@@ -101,9 +113,13 @@ class InstallerWindow(Gtk.ApplicationWindow):
         # Content Stack
         self.stack = Gtk.Stack()
         self.stack.set_transition_type(Gtk.StackTransitionType.SLIDE_LEFT_RIGHT)
-        self.stack.set_transition_duration(300)
+        self.stack.set_transition_duration(400)
         self.stack.get_style_context().add_class("content-area")
-        body.pack_start(self.stack, True, True, 0)
+
+        content_scroll = Gtk.ScrolledWindow()
+        content_scroll.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC)
+        content_scroll.add(self.stack)
+        body.pack_start(content_scroll, True, True, 0)
 
         # Create all pages
         self.pages = {
@@ -126,7 +142,7 @@ class InstallerWindow(Gtk.ApplicationWindow):
         nav_bar.set_margin_bottom(12)
         main_box.pack_end(nav_bar, False, False, 0)
 
-        self.btn_back = Gtk.Button(label="◀  Geri")
+        self.btn_back = Gtk.Button(label="< Geri")
         self.btn_back.get_style_context().add_class("btn-secondary")
         self.btn_back.connect("clicked", self._on_back)
         nav_bar.pack_start(self.btn_back, False, False, 0)
@@ -134,7 +150,7 @@ class InstallerWindow(Gtk.ApplicationWindow):
         spacer = Gtk.Box()
         nav_bar.pack_start(spacer, True, True, 0)
 
-        self.btn_next = Gtk.Button(label="İleri  ▶")
+        self.btn_next = Gtk.Button(label="İleri >")
         self.btn_next.get_style_context().add_class("btn-primary")
         self.btn_next.connect("clicked", self._on_next)
         nav_bar.pack_end(self.btn_next, False, False, 0)
@@ -167,14 +183,14 @@ class InstallerWindow(Gtk.ApplicationWindow):
         self.btn_back.set_visible(self.current_step > 0)
 
         if self.current_step == len(STEPS) - 2:  # Summary page
-            self.btn_next.set_label("🚀  Kurulumu Başlat")
+            self.btn_next.set_label("Kurulumu Başlat")
             self.btn_next.get_style_context().remove_class("btn-primary")
             self.btn_next.get_style_context().add_class("btn-danger")
         elif self.current_step == len(STEPS) - 1:  # Progress page
             self.btn_next.set_visible(False)
             self.btn_back.set_visible(False)
         else:
-            self.btn_next.set_label("İleri  ▶")
+            self.btn_next.set_label("İleri >")
             self.btn_next.get_style_context().remove_class("btn-danger")
             self.btn_next.get_style_context().add_class("btn-primary")
 

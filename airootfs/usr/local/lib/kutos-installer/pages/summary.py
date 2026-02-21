@@ -47,7 +47,7 @@ class SummaryPage(Gtk.Box):
         warning = Gtk.Label(xalign=0)
         warning.set_markup(
             '<span foreground="#ecc94b">'
-            "⚠️  Kurulumu başlattıktan sonra geri alınamaz!\n"
+            "UYARI: Kurulumu başlattıktan sonra geri alınamaz!\n"
             "Hedef diskteki veriler silinecektir."
             "</span>"
         )
@@ -62,24 +62,18 @@ class SummaryPage(Gtk.Box):
         config = self.window.config
 
         sections = [
-            ("🖥️  Masaüstü Ortamı", DE_NAMES.get(config.get("desktop", "xfce"), "?")),
-            ("💾  Hedef Disk", config.get("disk", "Seçilmedi")),
-            (
-                "📁  Bölümlendirme",
-                "Otomatik" if config.get("partition_mode") == "auto" else "Manuel",
-            ),
-            ("👤  Kullanıcı", config.get("username", "")),
-            ("🏠  Bilgisayar Adı", config.get("hostname", "kutos")),
-            ("🌍  Dil", config.get("language", "tr_TR.UTF-8")),
-            ("🕐  Saat Dilimi", config.get("timezone", "Europe/Istanbul")),
-            (
-                "🔑  Sudo",
-                "Evet" if config.get("sudo", True) else "Hayır",
-            ),
+            ("computer-symbolic", "Masaüstü Ortamı", DE_NAMES.get(config.get("desktop", "xfce"), "?")),
+            ("drive-harddisk-symbolic", "Hedef Disk", config.get("disk", "Seçilmedi")),
+            ("folder-symbolic", "Bölümlendirme", "Otomatik" if config.get("partition_mode") == "auto" else "Manuel"),
+            ("avatar-default-symbolic", "Kullanıcı", config.get("username", "")),
+            ("network-server-symbolic", "Bilgisayar Adı", config.get("hostname", "kutos")),
+            ("preferences-desktop-locale-symbolic", "Dil", config.get("language", "tr_TR.UTF-8")),
+            ("preferences-system-time-symbolic", "Saat Dilimi", config.get("timezone", "Europe/Istanbul")),
+            ("dialog-password-symbolic", "Sudo", "Evet" if config.get("sudo", True) else "Hayır"),
         ]
 
-        for label, value in sections:
-            self._add_summary_row(label, value)
+        for icon_name, label, value in sections:
+            self._add_summary_row(icon_name, label, value)
 
         # Extra packages
         extras = config.get("extra_packages", [])
@@ -87,19 +81,22 @@ class SummaryPage(Gtk.Box):
             pkg_str = ", ".join(extras[:10])
             if len(extras) > 10:
                 pkg_str += f" (+{len(extras) - 10} daha)"
-            self._add_summary_row(f"📦  Ek Paketler ({len(extras)})", pkg_str)
+            self._add_summary_row("package-x-generic-symbolic", f"Ek Paketler ({len(extras)})", pkg_str)
         else:
-            self._add_summary_row("📦  Ek Paketler", "Hiçbiri seçilmedi")
+            self._add_summary_row("package-x-generic-symbolic", "Ek Paketler", "Hiçbiri seçilmedi")
 
         self.summary_box.show_all()
 
-    def _add_summary_row(self, label, value):
+    def _add_summary_row(self, icon_name, label, value):
         row = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=12)
         row.get_style_context().add_class("summary-section")
 
+        img = Gtk.Image.new_from_icon_name(icon_name, Gtk.IconSize.BUTTON)
+        row.pack_start(img, False, False, 0)
+
         lbl = Gtk.Label(label=label, xalign=0)
         lbl.get_style_context().add_class("summary-label")
-        lbl.set_size_request(200, -1)
+        lbl.set_size_request(180, -1)
         row.pack_start(lbl, False, False, 0)
 
         val = Gtk.Label(label=value, xalign=0)
