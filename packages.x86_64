@@ -1,0 +1,142 @@
+# ========================================
+# KutOS — Minimal Paket Listesi
+# ========================================
+
+# === Temel Sistem ===
+base
+linux
+linux-firmware
+linux-headers
+mkinitcpio
+mkinitcpio-archiso
+mkinitcpio-nfs-utils
+syslinux
+edk2-shell
+
+# === CPU Microcode ===
+amd-ucode
+intel-ucode
+
+# === Firmware (Minimal) ===
+sof-firmware
+
+# === Dosya Sistemleri ===
+btrfs-progs
+dosfstools
+e2fsprogs
+exfatprogs
+f2fs-tools
+ntfs-3g
+xfsprogs
+squashfs-tools
+mtools
+gptfdisk
+
+# === Boot ===
+grub
+efibootmgr
+
+# === Ağ ===
+networkmanager
+network-manager-applet
+dhcpcd
+wpa_supplicant
+wireless-regdb
+wireless_tools
+iw
+iwd
+usb_modeswitch
+usbmuxd
+
+# === Temel Araçlar ===
+arch-install-scripts
+base-devel
+git
+wget
+curl
+sudo
+less
+nano
+vim
+zsh
+grml-zsh-config
+diffutils
+usbutils
+pv
+rsync
+tmux
+reflector
+man-db
+man-pages
+
+# === Disk Araçları ===
+parted
+gparted
+gpart
+hdparm
+smartmontools
+lvm2
+cryptsetup
+mdadm
+sdparm
+nvme-cli
+
+# === Xorg / Görüntü ===
+xorg-server
+xorg-xinit
+xorg-xrandr
+xf86-video-vesa
+xf86-video-amdgpu
+xf86-video-intel
+xf86-video-nouveau
+mesa
+
+# === XFCE Masaüstü (Live Ortam) ===
+xfce4
+xfce4-goodies
+xorg-xinit
+xfce4-terminal
+thunar
+mousepad
+
+# === Ses ===
+pipewire
+pipewire-alsa
+pipewire-pulse
+wireplumber
+pavucontrol
+alsa-utils
+
+# === GTK/Python Installer Bağımlılıkları ===
+python
+python-gobject
+gtk3
+
+# === Fontlar ===
+ttf-dejavu
+noto-fonts
+
+# === Sanal Makine Desteği ===
+virtualbox-guest-utils-nox
+open-vm-tools
+qemu-guest-agent
+
+# === Güvenlik ===
+openssh
+libfido2
+openpgp-card-tools
+sequoia-sq
+tpm2-tools
+tpm2-tss
+
+# === Diğer ===
+xdg-utils
+terminus-font
+memtest86+
+memtest86+-efi
+bolt
+dmidecode
+systemd-resolvconf
+
+# === Tarayıcı (Live Ortam) ===
+firefox

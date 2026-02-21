@@ -1,0 +1,3 @@
+#!/bin/bash
+# KutOS Installer Launcher
+exec python3 /usr/local/lib/kutos-installer/main.py "$@"

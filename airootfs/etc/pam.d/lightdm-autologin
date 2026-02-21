@@ -1,0 +1,11 @@
+#%PAM-1.0
+# KutOS Live — root autologin PAM config
+# Default lightdm-autologin blocks root with:
+#   auth required pam_succeed_if.so user != root quiet_success
+# We remove that restriction for the live environment.
+
+auth        sufficient  pam_permit.so
+auth        include     system-login
+account     include     system-login
+password    include     system-login
+session     include     system-login

@@ -1,0 +1,400 @@
+/* ========================================
+ * KutOS Installer — Modern Dark Theme
+ * ======================================== */
+
+/* === Global === */
+* {
+    font-family: "Noto Sans", "DejaVu Sans", sans-serif;
+}
+
+window {
+    background-color: #0f0f1a;
+}
+
+/* === Header Bar === */
+.header-bar {
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    border-bottom: 1px solid #2a2a4a;
+    padding: 12px 20px;
+    min-height: 48px;
+}
+
+.header-title {
+    color: #e0e0ff;
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+
+.header-subtitle {
+    color: #8888aa;
+    font-size: 12px;
+}
+
+/* === Sidebar Steps === */
+.sidebar {
+    background-color: #12122a;
+    border-right: 1px solid #2a2a4a;
+    padding: 20px 16px;
+    min-width: 220px;
+}
+
+.step-item {
+    padding: 10px 14px;
+    margin: 4px 0;
+    border-radius: 8px;
+    color: #6a6a8a;
+    font-size: 13px;
+    transition: all 200ms ease;
+}
+
+.step-item.active {
+    background-color: rgba(0, 180, 216, 0.15);
+    color: #00b4d8;
+    font-weight: 600;
+    border-left: 3px solid #00b4d8;
+}
+
+.step-item.completed {
+    color: #48bb78;
+}
+
+.step-number {
+    font-size: 11px;
+    font-weight: 700;
+    min-width: 24px;
+    min-height: 24px;
+    border-radius: 50%;
+    background-color: #2a2a4a;
+    color: #6a6a8a;
+}
+
+.step-number.active {
+    background-color: #00b4d8;
+    color: #ffffff;
+}
+
+.step-number.completed {
+    background-color: #48bb78;
+    color: #ffffff;
+}
+
+/* === Content Area === */
+.content-area {
+    background-color: #0f0f1a;
+    padding: 40px;
+}
+
+.page-title {
+    color: #e0e0ff;
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.page-description {
+    color: #8888aa;
+    font-size: 14px;
+    margin-bottom: 30px;
+}
+
+/* === Cards === */
+.card {
+    background-color: #1a1a2e;
+    border: 1px solid #2a2a4a;
+    border-radius: 12px;
+    padding: 20px;
+    margin: 8px 0;
+    transition: all 200ms ease;
+}
+
+.card:hover {
+    border-color: #00b4d8;
+    background-color: #1e1e36;
+}
+
+.card.selected {
+    border-color: #00b4d8;
+    background-color: rgba(0, 180, 216, 0.1);
+    box-shadow: 0 0 0 1px #00b4d8;
+}
+
+.card-title {
+    color: #e0e0ff;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.card-description {
+    color: #8888aa;
+    font-size: 13px;
+    margin-top: 4px;
+}
+
+/* === Buttons === */
+.btn-primary {
+    background: linear-gradient(135deg, #00b4d8 0%, #0096c7 100%);
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 28px;
+    font-size: 14px;
+    font-weight: 600;
+    min-height: 40px;
+    transition: all 200ms ease;
+}
+
+.btn-primary:hover {
+    background: linear-gradient(135deg, #00c4e8 0%, #00a6d7 100%);
+    box-shadow: 0 4px 12px rgba(0, 180, 216, 0.3);
+}
+
+.btn-primary:disabled {
+    background: #2a2a4a;
+    color: #6a6a8a;
+}
+
+.btn-secondary {
+    background-color: transparent;
+    color: #8888aa;
+    border: 1px solid #3a3a5a;
+    border-radius: 8px;
+    padding: 10px 28px;
+    font-size: 14px;
+    font-weight: 500;
+    min-height: 40px;
+}
+
+.btn-secondary:hover {
+    border-color: #5a5a7a;
+    color: #b0b0cc;
+}
+
+.btn-danger {
+    background: linear-gradient(135deg, #e53e3e 0%, #c53030 100%);
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 28px;
+    font-size: 14px;
+    font-weight: 600;
+    min-height: 40px;
+}
+
+/* === Input Fields === */
+entry {
+    background-color: #1a1a2e;
+    color: #e0e0ff;
+    border: 1px solid #3a3a5a;
+    border-radius: 8px;
+    padding: 10px 14px;
+    font-size: 14px;
+    min-height: 38px;
+    caret-color: #00b4d8;
+}
+
+entry:focus {
+    border-color: #00b4d8;
+    box-shadow: 0 0 0 2px rgba(0, 180, 216, 0.2);
+}
+
+entry:disabled {
+    background-color: #12122a;
+    color: #4a4a6a;
+}
+
+/* === Labels === */
+.field-label {
+    color: #b0b0cc;
+    font-size: 13px;
+    font-weight: 500;
+    margin-bottom: 6px;
+}
+
+.info-text {
+    color: #8888aa;
+    font-size: 12px;
+}
+
+.warning-text {
+    color: #ecc94b;
+    font-size: 12px;
+}
+
+.error-text {
+    color: #fc8181;
+    font-size: 12px;
+}
+
+.success-text {
+    color: #48bb78;
+    font-size: 12px;
+}
+
+/* === Radio & Check Buttons === */
+radiobutton, checkbutton {
+    color: #b0b0cc;
+    font-size: 14px;
+    padding: 6px 0;
+}
+
+radiobutton:checked, checkbutton:checked {
+    color: #e0e0ff;
+}
+
+/* === ComboBox === */
+combobox button {
+    background-color: #1a1a2e;
+    color: #e0e0ff;
+    border: 1px solid #3a3a5a;
+    border-radius: 8px;
+    padding: 8px 14px;
+    min-height: 36px;
+}
+
+/* === Progress Bar === */
+progressbar {
+    min-height: 8px;
+}
+
+progressbar trough {
+    background-color: #2a2a4a;
+    border-radius: 4px;
+    min-height: 8px;
+}
+
+progressbar progress {
+    background: linear-gradient(90deg, #00b4d8 0%, #48bb78 100%);
+    border-radius: 4px;
+    min-height: 8px;
+}
+
+/* === Text View (Log) === */
+textview {
+    background-color: #0a0a14;
+    color: #48bb78;
+    font-family: "DejaVu Sans Mono", monospace;
+    font-size: 12px;
+    padding: 12px;
+}
+
+textview text {
+    background-color: #0a0a14;
+    color: #48bb78;
+}
+
+/* === Scrollbar === */
+scrollbar slider {
+    background-color: #3a3a5a;
+    border-radius: 4px;
+    min-width: 6px;
+    min-height: 6px;
+}
+
+scrollbar slider:hover {
+    background-color: #5a5a7a;
+}
+
+/* === Separator === */
+separator {
+    background-color: #2a2a4a;
+    min-height: 1px;
+}
+
+/* === Welcome Page === */
+.welcome-logo {
+    margin: 20px 0;
+}
+
+.welcome-title {
+    color: #e0e0ff;
+    font-size: 32px;
+    font-weight: 700;
+}
+
+.welcome-subtitle {
+    color: #8888aa;
+    font-size: 16px;
+    margin-top: 8px;
+}
+
+/* === DE Preview Cards === */
+.de-card {
+    background-color: #1a1a2e;
+    border: 2px solid #2a2a4a;
+    border-radius: 16px;
+    padding: 24px;
+    min-width: 200px;
+    transition: all 250ms ease;
+}
+
+.de-card:hover {
+    border-color: #4a4a6a;
+    background-color: #1e1e36;
+}
+
+.de-card.selected {
+    border-color: #00b4d8;
+    background-color: rgba(0, 180, 216, 0.08);
+    box-shadow: 0 0 20px rgba(0, 180, 216, 0.15);
+}
+
+.de-card-name {
+    color: #e0e0ff;
+    font-size: 18px;
+    font-weight: 700;
+    margin-top: 12px;
+}
+
+.de-card-type {
+    color: #00b4d8;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.de-card-desc {
+    color: #8888aa;
+    font-size: 12px;
+    margin-top: 8px;
+}
+
+/* === Summary Page === */
+.summary-section {
+    background-color: #1a1a2e;
+    border: 1px solid #2a2a4a;
+    border-radius: 12px;
+    padding: 16px 20px;
+    margin: 8px 0;
+}
+
+.summary-label {
+    color: #8888aa;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.summary-value {
+    color: #e0e0ff;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+/* === Install Progress === */
+.progress-phase {
+    color: #b0b0cc;
+    font-size: 14px;
+    font-weight: 600;
+    margin: 12px 0 4px 0;
+}
+
+.progress-detail {
+    color: #8888aa;
+    font-size: 12px;
+}
+
+.install-complete-icon {
+    color: #48bb78;
+    font-size: 64px;
+}
