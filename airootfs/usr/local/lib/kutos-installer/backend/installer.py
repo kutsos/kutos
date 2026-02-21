@@ -43,7 +43,7 @@ def run_installation(config, progress_cb, log_cb, done_cb):
         done_cb: callable(success, error_msg)
     """
     try:
-        total_steps = 10
+        total_steps = 9
         step = 0
 
         def advance(phase, detail=""):
@@ -133,11 +133,7 @@ def run_installation(config, progress_cb, log_cb, done_cb):
         root_same = config.get("root_same_password", True)
         create_user(MOUNT_POINT, username, password, sudo, root_same, log_cb)
 
-        # === Step 9: yay (AUR Helper) ===
-        advance("yay kuruluyor...", "AUR helper")
-        install_yay(MOUNT_POINT, username, log_cb)
-
-        # === Step 10: Bootloader & Services ===
+        # === Step 9: Bootloader & Services ===
         advance("Sistem yapılandırılıyor...", "Bootloader ve Servisler")
         disk = config.get("disk", "")
         configure_grub(MOUNT_POINT, disk, is_uefi, log_cb)

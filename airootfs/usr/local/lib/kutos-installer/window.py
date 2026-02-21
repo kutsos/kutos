@@ -7,28 +7,31 @@ from gi.repository import Gtk, GLib, GdkPixbuf
 import os
 
 from pages.welcome import WelcomePage
+from pages.network import NetworkPage
 from pages.disk import DiskPage
 from pages.desktop import DesktopPage
 from pages.user import UserPage
 from pages.packages import PackagesPage
 from pages.summary import SummaryPage
 from pages.progress import ProgressPage
+import i18n
 
 
 STEPS = [
-    ("welcome", "Hoş Geldiniz", "0"),
-    ("disk", "Disk Seçimi", "1"),
-    ("desktop", "Masaüstü Ortamı", "2"),
-    ("user", "Kullanıcı Ayarları", "3"),
-    ("packages", "Ek Paketler", "4"),
-    ("summary", "Özet", "5"),
-    ("progress", "Kurulum", "6"),
+    ("welcome", "step_welcome"),
+    ("network", "step_network"),
+    ("disk", "step_disk"),
+    ("desktop", "step_desktop"),
+    ("user", "step_user"),
+    ("packages", "step_packages"),
+    ("summary", "step_summary"),
+    ("progress", "step_progress"),
 ]
 
 
 class InstallerWindow(Gtk.Window):
     def __init__(self, application=None):
-        super().__init__(title="KutOS Kurulumu")
+        super().__init__(title="KutOS") # Set real title in refresh_translations
         self.set_default_size(900, 600)
         self.set_position(Gtk.WindowPosition.CENTER)
         self.maximize()
@@ -50,13 +53,14 @@ class InstallerWindow(Gtk.Window):
         self.current_step = 0
 
         self._build_ui()
+        self.refresh_translations()
 
     def _build_ui(self):
         main_box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
         self.add(main_box)
 
         # Header
-        header = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=6)
+        header = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=12)
         header.get_style_context().add_class("header-bar")
         header.set_valign(Gtk.Align.CENTER)
 
@@ -64,19 +68,22 @@ class InstallerWindow(Gtk.Window):
         try:
             base_dir = os.path.dirname(os.path.abspath(__file__))
             logo_path = os.path.join(base_dir, "theme", "logo.svg")
-            pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_scale(logo_path, 24, 24, True)
+            pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_scale(logo_path, 20, 20, True)
             logo_img = Gtk.Image.new_from_pixbuf(pixbuf)
+            logo_img.set_valign(Gtk.Align.CENTER)
             header.pack_start(logo_img, False, False, 0)
         except Exception:
             pass
 
         logo_label = Gtk.Label(label="KutOS")
         logo_label.get_style_context().add_class("header-title")
+        logo_label.set_valign(Gtk.Align.CENTER)
         header.pack_start(logo_label, False, False, 0)
 
-        subtitle = Gtk.Label(label="  Sistem Kurulumu")
-        subtitle.get_style_context().add_class("header-subtitle")
-        header.pack_start(subtitle, False, False, 0)
+        self.subtitle_label = Gtk.Label()
+        self.subtitle_label.get_style_context().add_class("header-subtitle")
+        self.subtitle_label.set_valign(Gtk.Align.CENTER)
+        header.pack_start(self.subtitle_label, False, False, 0)
         main_box.pack_start(header, False, False, 0)
 
         # Body: Sidebar + Content
@@ -92,6 +99,7 @@ class InstallerWindow(Gtk.Window):
 
         self.step_labels = []
         self.step_numbers = []
+        self.sidebar_labels = []
         for i, (_, label, _) in enumerate(STEPS):
             row = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=10)
             row.get_style_context().add_class("step-item")
@@ -103,12 +111,13 @@ class InstallerWindow(Gtk.Window):
             num.set_valign(Gtk.Align.CENTER)
             row.pack_start(num, False, False, 0)
 
-            lbl = Gtk.Label(label=label, xalign=0)
+            lbl = Gtk.Label(xalign=0)
             row.pack_start(lbl, True, True, 0)
 
             self.sidebar.pack_start(row, False, False, 0)
             self.step_labels.append(row)
             self.step_numbers.append(num)
+            self.sidebar_labels.append(lbl) # Track labels for i18n
 
         # Content Stack
         self.stack = Gtk.Stack()
@@ -124,6 +133,7 @@ class InstallerWindow(Gtk.Window):
         # Create all pages
         self.pages = {
             "welcome": WelcomePage(self),
+            "network": NetworkPage(self),
             "disk": DiskPage(self),
             "desktop": DesktopPage(self),
             "user": UserPage(self),
@@ -142,7 +152,7 @@ class InstallerWindow(Gtk.Window):
         nav_bar.set_margin_bottom(12)
         main_box.pack_end(nav_bar, False, False, 0)
 
-        self.btn_back = Gtk.Button(label="< Geri")
+        self.btn_back = Gtk.Button()
         self.btn_back.get_style_context().add_class("btn-secondary")
         self.btn_back.connect("clicked", self._on_back)
         nav_bar.pack_start(self.btn_back, False, False, 0)
@@ -150,7 +160,7 @@ class InstallerWindow(Gtk.Window):
         spacer = Gtk.Box()
         nav_bar.pack_start(spacer, True, True, 0)
 
-        self.btn_next = Gtk.Button(label="İleri >")
+        self.btn_next = Gtk.Button()
         self.btn_next.get_style_context().add_class("btn-primary")
         self.btn_next.connect("clicked", self._on_next)
         nav_bar.pack_end(self.btn_next, False, False, 0)
@@ -183,14 +193,14 @@ class InstallerWindow(Gtk.Window):
         self.btn_back.set_visible(self.current_step > 0)
 
         if self.current_step == len(STEPS) - 2:  # Summary page
-            self.btn_next.set_label("Kurulumu Başlat")
+            self.btn_next.set_label(i18n._("nav_install"))
             self.btn_next.get_style_context().remove_class("btn-primary")
             self.btn_next.get_style_context().add_class("btn-danger")
         elif self.current_step == len(STEPS) - 1:  # Progress page
             self.btn_next.set_visible(False)
             self.btn_back.set_visible(False)
         else:
-            self.btn_next.set_label("İleri >")
+            self.btn_next.set_label(i18n._("nav_next"))
             self.btn_next.get_style_context().remove_class("btn-danger")
             self.btn_next.get_style_context().add_class("btn-primary")
 
@@ -220,6 +230,24 @@ class InstallerWindow(Gtk.Window):
         if self.current_step > 0:
             self.current_step -= 1
             self._update_ui()
+
+    def refresh_translations(self):
+        """Update all UI strings based on current i18n language."""
+        self.set_title(i18n._("step_welcome") + " - KutOS")
+        self.subtitle_label.set_text(i18n._("step_progress")) # Or a generic 'System Setup'
+        
+        # Sidebar labels
+        for lbl, (_, key) in zip(self.sidebar_labels, STEPS):
+            lbl.set_text(i18n._(key))
+            
+        # Navigation buttons
+        self.btn_back.set_label(i18n._("nav_back"))
+        self._update_ui() # This will handle the Next button label (İleri vs Kurulumu Başlat)
+
+        # Notify all pages to refresh their content
+        for page in self.pages.values():
+            if hasattr(page, "refresh"):
+                page.refresh()
 
     def go_to_step(self, step_index):
         self.current_step = step_index

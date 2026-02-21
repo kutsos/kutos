@@ -9,6 +9,7 @@ gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk, Gdk, Gio
 
 from window import InstallerWindow
+import i18n
 
 def _load_css():
     css_path = os.path.join(
@@ -26,6 +27,7 @@ def _load_css():
     settings.set_property("gtk-application-prefer-dark-theme", True)
 
 def main():
+    i18n.init() # Default to Turkish
     _load_css()
     win = InstallerWindow(application=None)
     win.connect("destroy", Gtk.main_quit)

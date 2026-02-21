@@ -4,43 +4,39 @@ import gi
 
 gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk
+import i18n
 
 
-DE_OPTIONS = [
-    {
-        "id": "xfce",
-        "name": "XFCE",
-        "type": "X11 • Geleneksel",
-        "icon": "computer-symbolic",
-        "desc": "Hafif, kararlı ve özelleştirilebilir masaüstü.\n"
-        "Düşük kaynak tüketimi, eski donanıma uygun.\n"
-        "~300MB RAM kullanımı.",
-        "packages": "xfce4, xfce4-goodies, lightdm",
-        "ram": "~300MB",
-    },
-    {
-        "id": "hyprland",
-        "name": "Hyprland",
-        "type": "Wayland • Tiling WM",
-        "icon": "preferences-system-windows-symbolic",
-        "desc": "Modern, animasyonlu Wayland tiling compositor.\n"
-        "Yüksek performans, güçlü özelleştirme.\n"
-        "Klavye odaklı iş akışı.",
-        "packages": "hyprland, waybar, wofi, foot, swaybg",
-        "ram": "~200MB",
-    },
-    {
-        "id": "gnome",
-        "name": "GNOME",
-        "type": "Wayland • Modern DE",
-        "icon": "user-desktop-symbolic",
-        "desc": "Modern, sade ve kullanıcı dostu masaüstü.\n"
-        "Dokunmatik ekran desteği, entegre uygulamalar.\n"
-        "Daha yüksek kaynak kullanımı.",
-        "packages": "gnome, gnome-tweaks, gdm",
-        "ram": "~800MB",
-    },
-]
+def get_de_options():
+    return [
+        {
+            "id": "xfce",
+            "name": "XFCE",
+            "type": i18n._("de_xfce_type"),
+            "icon": "computer-symbolic",
+            "desc": i18n._("de_xfce_desc"),
+            "packages": "xfce4, xfce4-goodies, lightdm",
+            "ram": "~300MB",
+        },
+        {
+            "id": "hyprland",
+            "name": "Hyprland",
+            "type": i18n._("de_hyprland_type"),
+            "icon": "preferences-system-windows-symbolic",
+            "desc": i18n._("de_hyprland_desc"),
+            "packages": "hyprland, waybar, wofi, foot, swaybg",
+            "ram": "~200MB",
+        },
+        {
+            "id": "gnome",
+            "name": "GNOME",
+            "type": i18n._("de_gnome_type"),
+            "icon": "user-desktop-symbolic",
+            "desc": i18n._("de_gnome_desc"),
+            "packages": "gnome, gnome-tweaks, gdm",
+            "ram": "~800MB",
+        },
+    ]
 
 
 class DesktopPage(Gtk.Box):
@@ -52,20 +48,19 @@ class DesktopPage(Gtk.Box):
         self.set_margin_top(30)
         self.selected_de = "xfce"
 
+        self._build_ui()
+
+    def _build_ui(self):
+        # Clear existing
+        for child in self.get_children():
+            self.remove(child)
+
         # Title
         title = Gtk.Label(xalign=0)
-        title.set_markup(
-            '<span font_weight="bold" size="20000" foreground="#e0e0ff">'
-            "Masaüstü Ortamı"
-            "</span>"
-        )
+        title.set_markup(f'<span font_weight="bold" size="20000" foreground="#fafafa">{i18n._("desktop_title")}</span>')
         self.pack_start(title, False, False, 0)
 
-        desc = Gtk.Label(
-            label="Kurulacak masaüstü ortamını seçin. "
-            "Her birinin avantaj ve kaynak kullanımı farklıdır.",
-            xalign=0,
-        )
+        desc = Gtk.Label(label=i18n._("desktop_desc"), xalign=0)
         desc.set_line_wrap(True)
         desc.get_style_context().add_class("page-description")
         self.pack_start(desc, False, False, 0)
@@ -75,7 +70,8 @@ class DesktopPage(Gtk.Box):
         self.pack_start(self.cards_box, True, True, 0)
 
         self.de_cards = {}
-        for de in DE_OPTIONS:
+        options = get_de_options()
+        for de in options:
             card = self._create_de_card(de)
             self.cards_box.pack_start(card, True, True, 0)
 
@@ -97,8 +93,8 @@ class DesktopPage(Gtk.Box):
         self.detail_ram.get_style_context().add_class("info-text")
         self.details_box.pack_start(self.detail_ram, False, False, 0)
 
-        # Select XFCE by default
-        self._select_de("xfce")
+        self._select_de(self.selected_de)
+        self.show_all()
 
     def _create_de_card(self, de):
         event = Gtk.EventBox()
@@ -143,17 +139,21 @@ class DesktopPage(Gtk.Box):
         self._update_details(de_id)
 
     def _update_details(self, de_id):
-        de = next(d for d in DE_OPTIONS if d["id"] == de_id)
+        options = get_de_options()
+        de = next(d for d in options if d["id"] == de_id)
         self.detail_title.set_markup(
-            f'<span font_weight="bold" foreground="#e0e0ff">'
-            f"Seçili: {de['name']}</span>"
+            f'<span font_weight="bold" foreground="#fafafa">'
+            f'{i18n._("de_selected")} {de["name"]}</span>'
         )
         self.detail_pkgs.set_markup(
-            f'<span foreground="#8888aa">Paketler: {de["packages"]}</span>'
+            f'<span foreground="#a1a1aa">{i18n._("de_packages")} {de["packages"]}</span>'
         )
         self.detail_ram.set_markup(
-            f'<span foreground="#8888aa">Tahmini RAM: {de["ram"]}</span>'
+            f'<span foreground="#a1a1aa">{i18n._("de_ram")} {de["ram"]}</span>'
         )
 
     def collect(self):
         self.window.config["desktop"] = self.selected_de
+
+    def refresh(self):
+        self._build_ui()

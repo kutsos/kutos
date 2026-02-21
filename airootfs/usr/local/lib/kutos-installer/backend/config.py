@@ -156,10 +156,10 @@ def install_yay(mount_point, username, log_cb):
         f.write(f"{username} ALL=(ALL) NOPASSWD: ALL\n")
     os.chmod(sudoers_tmp, 0o440)
 
-    # Run as the created user (makepkg won't run as root)
+    # Run as the created user without dropping into a full login shell to maintain /tmp access
     _chroot(
         mount_point,
-        ["su", "-", username, "-c", "bash /tmp/install-yay.sh"],
+        ["su", username, "-c", "bash /tmp/install-yay.sh"],
         log_cb,
     )
 

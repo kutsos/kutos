@@ -1,62 +1,61 @@
 /* ========================================
- * KutOS Installer — Modern Dark Theme
+ * KutOS Installer — Neutral Premium Theme
  * ======================================== */
 
 /* === Global === */
 * {
-    font-family: "Noto Sans", "DejaVu Sans", sans-serif;
+    font-family: "Noto Sans", "Inter", "DejaVu Sans", sans-serif;
 }
 
 window {
-    background-color: #0f172a;
+    background-color: #09090b;
 }
 
 /* === Header Bar === */
 .header-bar {
-    background: linear-gradient(135deg, #1e293b 0%, #16213e 100%);
-    border-bottom: 1px solid #334155;
-    padding: 12px 20px;
-    min-height: 48px;
+    background: #09090b;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    padding: 14px 24px;
+    min-height: 52px;
 }
 
 .header-title {
-    color: #f1f5f9;
-    font-size: 18px;
+    color: #fafafa;
+    font-size: 19px;
     font-weight: 700;
-    letter-spacing: 0.5px;
 }
 
 .header-subtitle {
-    color: #94a3b8;
-    font-size: 12px;
+    color: #71717a;
+    font-size: 13px;
+    margin-left: 12px;
 }
 
 /* === Sidebar Steps === */
 .sidebar {
-    background-color: #0b1120;
-    border-right: 1px solid #334155;
-    padding: 20px 16px;
-    min-width: 220px;
+    background: #09090b;
+    border-right: 1px solid rgba(255, 255, 255, 0.06);
+    padding: 24px 16px;
+    min-width: 240px;
 }
 
 .step-item {
     padding: 10px 14px;
     margin: 4px 0;
-    border-radius: 8px;
-    color: #6a6a8a;
-    font-size: 13px;
+    border-radius: 10px;
+    color: #52525b;
+    font-size: 14px;
     transition: all 200ms ease;
 }
 
 .step-item.active {
-    background-color: rgba(0, 180, 216, 0.15);
-    color: #0ea5e9;
+    background: rgba(255, 255, 255, 0.04);
+    color: #fafafa;
     font-weight: 600;
-    border-left: 3px solid #0ea5e9;
 }
 
 .step-item.completed {
-    color: #48bb78;
+    color: #3b82f6;
 }
 
 .step-number {
@@ -65,43 +64,46 @@ window {
     min-width: 24px;
     min-height: 24px;
     border-radius: 50%;
-    background-color: #334155;
-    color: #6a6a8a;
+    background-color: #18181b;
+    color: #52525b;
+    border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .step-number.active {
-    background-color: #0ea5e9;
-    color: #ffffff;
+    background: #fafafa;
+    color: #09090b;
+    border-color: #fafafa;
 }
 
 .step-number.completed {
-    background-color: #48bb78;
+    background: #3b82f6;
     color: #ffffff;
+    border-color: #3b82f6;
 }
 
 /* === Content Area === */
 .content-area {
-    background-color: #0f172a;
+    background-color: transparent;
     padding: 40px;
 }
 
 .page-title {
-    color: #f1f5f9;
-    font-size: 24px;
+    color: #fafafa;
+    font-size: 28px;
     font-weight: 700;
     margin-bottom: 8px;
 }
 
 .page-description {
-    color: #94a3b8;
+    color: #a1a1aa;
     font-size: 14px;
-    margin-bottom: 30px;
+    margin-bottom: 32px;
 }
 
 /* === Cards === */
 .card {
-    background-color: #1e293b;
-    border: 1px solid #334155;
+    background: #18181b;
+    border: 1px solid rgba(255, 255, 255, 0.08);
     border-radius: 12px;
     padding: 20px;
     margin: 8px 0;
@@ -109,35 +111,34 @@ window {
 }
 
 .card:hover {
-    border-color: #0ea5e9;
-    background-color: #1e1e36;
+    border-color: rgba(255, 255, 255, 0.2);
+    background: #1c1c1f;
 }
 
 .card.selected {
-    border-color: #0ea5e9;
-    background-color: rgba(0, 180, 216, 0.1);
-    box-shadow: 0 0 0 1px #0ea5e9;
+    border-color: #3b82f6;
+    background: rgba(59, 130, 246, 0.05);
 }
 
 .card-title {
-    color: #f1f5f9;
+    color: #fafafa;
     font-size: 16px;
     font-weight: 600;
 }
 
 .card-description {
-    color: #94a3b8;
+    color: #a1a1aa;
     font-size: 13px;
     margin-top: 4px;
 }
 
 /* === Buttons === */
 .btn-primary {
-    background: linear-gradient(135deg, #0ea5e9 0%, #0284c7 100%);
-    color: #ffffff;
-    border: none;
+    background: #fafafa;
+    color: #09090b;
+    border: 1px solid #fafafa;
     border-radius: 8px;
-    padding: 10px 28px;
+    padding: 10px 24px;
     font-size: 14px;
     font-weight: 600;
     min-height: 40px;
@@ -145,37 +146,38 @@ window {
 }
 
 .btn-primary:hover {
-    background: linear-gradient(135deg, #00c4e8 0%, #00a6d7 100%);
-    box-shadow: 0 4px 12px rgba(0, 180, 216, 0.3);
+    background: #e4e4e7;
+    border-color: #e4e4e7;
 }
 
 .btn-primary:disabled {
-    background: #334155;
-    color: #6a6a8a;
+    background: #27272a;
+    color: #52525b;
+    border-color: #27272a;
 }
 
 .btn-secondary {
-    background-color: transparent;
-    color: #94a3b8;
-    border: 1px solid #475569;
+    background: transparent;
+    color: #fafafa;
+    border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 8px;
-    padding: 10px 28px;
+    padding: 10px 24px;
     font-size: 14px;
     font-weight: 500;
     min-height: 40px;
 }
 
 .btn-secondary:hover {
-    border-color: #5a5a7a;
-    color: #cbd5e1;
+    background-color: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.2);
 }
 
 .btn-danger {
-    background: linear-gradient(135deg, #e53e3e 0%, #c53030 100%);
+    background: #ef4444;
     color: #ffffff;
-    border: none;
+    border: 1px solid #ef4444;
     border-radius: 8px;
-    padding: 10px 28px;
+    padding: 10px 24px;
     font-size: 14px;
     font-weight: 600;
     min-height: 40px;
@@ -183,75 +185,75 @@ window {
 
 /* === Input Fields === */
 entry {
-    background-color: #1e293b;
-    color: #f1f5f9;
-    border: 1px solid #475569;
+    background-color: #18181b;
+    color: #fafafa;
+    border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 8px;
     padding: 10px 14px;
     font-size: 14px;
-    min-height: 38px;
-    caret-color: #0ea5e9;
+    min-height: 40px;
+    caret-color: #3b82f6;
 }
 
 entry:focus {
-    border-color: #0ea5e9;
-    box-shadow: 0 0 0 2px rgba(0, 180, 216, 0.2);
+    border-color: #3b82f6;
+    background-color: #1c1c1f;
 }
 
 entry:disabled {
-    background-color: #0b1120;
-    color: #4a4a6a;
+    background-color: #09090b;
+    color: #27272a;
 }
 
 /* === Labels === */
 .field-label {
-    color: #cbd5e1;
-    font-size: 13px;
+    color: #e4e4e7;
+    font-size: 14px;
     font-weight: 500;
     margin-bottom: 6px;
 }
 
 .info-text {
-    color: #94a3b8;
-    font-size: 12px;
+    color: #a1a1aa;
+    font-size: 13px;
 }
 
 .warning-text {
-    color: #ecc94b;
-    font-size: 12px;
+    color: #facc15;
+    font-size: 13px;
 }
 
 .error-text {
-    color: #fc8181;
-    font-size: 12px;
+    color: #f87171;
+    font-size: 13px;
 }
 
 .success-text {
-    color: #48bb78;
-    font-size: 12px;
+    color: #4ade80;
+    font-size: 13px;
 }
 
 /* === Radio & Check Buttons === */
 radiobutton,
 checkbutton {
-    color: #cbd5e1;
+    color: #a1a1aa;
     font-size: 14px;
     padding: 6px 0;
 }
 
 radiobutton:checked,
 checkbutton:checked {
-    color: #f1f5f9;
+    color: #fafafa;
 }
 
 /* === ComboBox === */
 combobox button {
-    background-color: #1e293b;
-    color: #f1f5f9;
-    border: 1px solid #475569;
+    background-color: #18181b;
+    color: #fafafa;
+    border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 8px;
     padding: 8px 14px;
-    min-height: 36px;
+    min-height: 38px;
 }
 
 /* === Progress Bar === */
@@ -260,46 +262,48 @@ progressbar {
 }
 
 progressbar trough {
-    background-color: #334155;
+    background-color: #18181b;
     border-radius: 4px;
     min-height: 8px;
 }
 
 progressbar progress {
-    background: linear-gradient(90deg, #0ea5e9 0%, #48bb78 100%);
+    background: #fafafa;
     border-radius: 4px;
     min-height: 8px;
 }
 
 /* === Text View (Log) === */
 textview {
-    background-color: #0a0a14;
-    color: #48bb78;
-    font-family: "DejaVu Sans Mono", monospace;
-    font-size: 12px;
-    padding: 12px;
+    background-color: #0d0d0e;
+    color: #fafafa;
+    font-family: "JetBrains Mono", "DejaVu Sans Mono", monospace;
+    font-size: 13px;
+    padding: 16px;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.06);
 }
 
 textview text {
-    background-color: #0a0a14;
-    color: #48bb78;
+    background-color: #0d0d0e;
+    color: #fafafa;
 }
 
 /* === Scrollbar === */
 scrollbar slider {
-    background-color: #475569;
+    background-color: rgba(255, 255, 255, 0.1);
     border-radius: 4px;
     min-width: 6px;
     min-height: 6px;
 }
 
 scrollbar slider:hover {
-    background-color: #5a5a7a;
+    background-color: rgba(255, 255, 255, 0.2);
 }
 
 /* === Separator === */
 separator {
-    background-color: #334155;
+    background-color: rgba(255, 255, 255, 0.06);
     min-height: 1px;
 }
 
@@ -309,93 +313,92 @@ separator {
 }
 
 .welcome-title {
-    color: #f1f5f9;
-    font-size: 32px;
+    color: #fafafa;
+    font-size: 36px;
     font-weight: 700;
 }
 
 .welcome-subtitle {
-    color: #94a3b8;
+    color: #a1a1aa;
     font-size: 16px;
     margin-top: 8px;
 }
 
 /* === DE Preview Cards === */
 .de-card {
-    background-color: #1e293b;
-    border: 2px solid #334155;
+    background: #18181b;
+    border: 1px solid rgba(255, 255, 255, 0.08);
     border-radius: 16px;
     padding: 24px;
     min-width: 200px;
-    transition: all 250ms ease;
+    transition: all 200ms ease;
 }
 
 .de-card:hover {
-    border-color: #4a4a6a;
-    background-color: #1e1e36;
+    border-color: rgba(255, 255, 255, 0.2);
+    background: #1c1c1f;
 }
 
 .de-card.selected {
-    border-color: #0ea5e9;
-    background-color: rgba(0, 180, 216, 0.08);
-    box-shadow: 0 0 20px rgba(0, 180, 216, 0.15);
+    border-color: #3b82f6;
+    background: rgba(59, 130, 246, 0.03);
+    box-shadow: 0 0 0 1px #3b82f6;
 }
 
 .de-card-name {
-    color: #f1f5f9;
+    color: #fafafa;
     font-size: 18px;
     font-weight: 700;
     margin-top: 12px;
 }
 
 .de-card-type {
-    color: #0ea5e9;
+    color: #3b82f6;
     font-size: 11px;
     font-weight: 600;
-    letter-spacing: 1px;
 }
 
 .de-card-desc {
-    color: #94a3b8;
-    font-size: 12px;
+    color: #a1a1aa;
+    font-size: 13px;
     margin-top: 8px;
 }
 
 /* === Summary Page === */
 .summary-section {
-    background-color: #1e293b;
-    border: 1px solid #334155;
+    background: #18181b;
+    border: 1px solid rgba(255, 255, 255, 0.08);
     border-radius: 12px;
     padding: 16px 20px;
     margin: 8px 0;
 }
 
 .summary-label {
-    color: #94a3b8;
+    color: #71717a;
     font-size: 12px;
-    font-weight: 500;
+    font-weight: 600;
 }
 
 .summary-value {
-    color: #f1f5f9;
+    color: #fafafa;
     font-size: 14px;
     font-weight: 600;
 }
 
 /* === Install Progress === */
 .progress-phase {
-    color: #cbd5e1;
-    font-size: 14px;
+    color: #fafafa;
+    font-size: 15px;
     font-weight: 600;
     margin: 12px 0 4px 0;
 }
 
 .progress-detail {
-    color: #94a3b8;
-    font-size: 12px;
+    color: #71717a;
+    font-size: 13px;
 }
 
 .install-complete-icon {
-    color: #48bb78;
+    color: #3b82f6;
     font-size: 64px;
 }
