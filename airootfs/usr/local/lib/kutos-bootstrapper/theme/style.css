@@ -1,0 +1,75 @@
+/* KutOS Bootstrapper Styles — Neutral/Zinc Theme */
+
+window {
+    background-color: #09090b;
+    color: #fafafa;
+}
+
+.main-container {
+    margin: 40px;
+}
+
+label.title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #fafafa;
+}
+
+label.subtitle {
+    font-size: 14px;
+    color: #a1a1aa;
+    margin-bottom: 30px;
+}
+
+button.suggested-action {
+    background-color: #18181b;
+    border: 1px solid #27272a;
+    border-radius: 6px;
+    padding: 10px 20px;
+    color: #fafafa;
+    transition: all 0.2s;
+}
+
+button.suggested-action:hover {
+    background-color: #27272a;
+    border-color: #3f3f46;
+}
+
+button.suggested-action:active {
+    background-color: #3f3f46;
+}
+
+progressbar trough {
+    background-color: #18181b;
+    border-radius: 4px;
+    min-height: 8px;
+}
+
+progressbar progress {
+    background-color: #3b82f6;
+    /* Modern Blue accent */
+    border-radius: 4px;
+}
+
+.network-item {
+    padding: 12px;
+    border-bottom: 1px solid #18181b;
+    background: transparent;
+}
+
+.network-item:hover {
+    background: #18181b;
+}
+
+entry {
+    background: #18181b;
+    border: 1px solid #27272a;
+    border-radius: 6px;
+    padding: 8px;
+    color: #fafafa;
+}
+
+entry:focus {
+    border-color: #3b82f6;
+}

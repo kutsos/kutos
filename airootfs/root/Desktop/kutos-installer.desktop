@@ -1,10 +1,7 @@
 [Desktop Entry]
-Version=1.0
 Name=KutOS Installer
-Name[tr]=KutOS Kurulumu
-Comment=Install KutOS to your disk
-Comment[tr]=KutOS'u diskinize kurun
-Exec=/usr/local/bin/kutos-installer
+Comment=Install KutOS to your disk (Net-Installer)
+Exec=/usr/local/bin/kutos-bootstrapper
 Icon=system-software-install
 Terminal=false
 Type=Application

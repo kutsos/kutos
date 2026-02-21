@@ -1,0 +1,3 @@
+#!/bin/bash
+# KutOS Bootstrapper Launcher
+python3 /usr/local/lib/kutos-bootstrapper/main.py "$@"

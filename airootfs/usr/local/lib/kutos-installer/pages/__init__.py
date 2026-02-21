@@ -1,1 +1,0 @@
-# KutOS Installer Pages
