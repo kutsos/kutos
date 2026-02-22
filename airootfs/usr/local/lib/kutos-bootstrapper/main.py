@@ -110,9 +110,34 @@ class BootstrapperWindow(Gtk.Window):
             # Clone from GitHub
             subprocess.run(["git", "clone", "--depth", "1", REPO_URL, INSTALLER_PATH], check=True)
             
+            # PATCHING: Add persistence logic to the downloaded installer
+            self._patch_installer()
+            
             GLib.idle_add(self._launch_installer)
         except Exception as e:
             GLib.idle_add(self._show_error, f"Download failed: {str(e)}")
+
+    def _patch_installer(self):
+        """Injects code into the cloned installer to ensure KutOS Settings persists."""
+        try:
+            # We look for the main installation engine in the cloned repo
+            # Based on common structures, it's either backend/installer.py or backend/config.py
+            target_file = os.path.join(INSTALLER_PATH, "backend/installer.py")
+            if not os.path.exists(target_file):
+                target_file = os.path.join(INSTALLER_PATH, "backend/config.py")
+            
+            if os.path.exists(target_file):
+                with open(target_file, "a") as f:
+                    f.write("\n\n# === KutOS Persistence Hook ===\n")
+                    f.write("import subprocess, os\ndef _kutos_persist():\n")
+                    f.write("    try:\n")
+                    f.write("        if os.path.exists('/mnt/usr/local/lib'):\n")
+                    f.write("            subprocess.run(['cp', '-r', '/usr/local/lib/kutos-settings', '/mnt/usr/local/lib/'], check=True)\n")
+                    f.write("            subprocess.run(['cp', '/usr/share/applications/kutos-settings.desktop', '/mnt/usr/share/applications/'], check=True)\n")
+                    f.write("    except: pass\n")
+                    f.write("_kutos_persist()\n")
+        except Exception as e:
+            print(f"Patching failed: {e}")
 
     def _launch_installer(self):
         # We need to run the cloned installer

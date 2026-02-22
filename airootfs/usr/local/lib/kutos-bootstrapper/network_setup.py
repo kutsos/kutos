@@ -26,7 +26,7 @@ class NetworkSetupPage(Gtk.Box):
 
         # Scrolled window for Wi-Fi list
         scrolled = Gtk.ScrolledWindow()
-        scrolled.set_policy(Gtk.Policy.NEVER, Gtk.Policy.AUTOMATIC)
+        scrolled.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC)
         scrolled.set_min_content_height(200)
         scrolled.set_min_content_width(400)
         

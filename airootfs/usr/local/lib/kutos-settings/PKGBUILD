@@ -1,0 +1,58 @@
+# Maintainer: KutOS Team <kutos@github.com>
+
+pkgname=kutos-settings
+pkgver=1.0
+pkgrel=1
+pkgdesc="Central configuration tool for the KutOS Linux distribution"
+arch=('any')
+url="https://github.com/kutos-linux"
+license=('GPL')
+depends=('python' 'python-gobject' 'gtk4' 'python-requests')
+
+# Source is local — when building from the repo, point to the app directory
+source=()
+
+package() {
+    # Application files
+    install -dm755 "${pkgdir}/usr/local/lib/kutos-settings"
+
+    # Copy all Python source files preserving directory structure
+    cd "${startdir}/src" 2>/dev/null || cd "${startdir}"
+
+    # Main entry point
+    install -Dm644 main.py "${pkgdir}/usr/local/lib/kutos-settings/main.py"
+
+    # UI module
+    install -dm755 "${pkgdir}/usr/local/lib/kutos-settings/ui"
+    install -Dm644 ui/__init__.py "${pkgdir}/usr/local/lib/kutos-settings/ui/__init__.py"
+    install -Dm644 ui/main_window.py "${pkgdir}/usr/local/lib/kutos-settings/ui/main_window.py"
+    install -Dm644 ui/sidebar.py "${pkgdir}/usr/local/lib/kutos-settings/ui/sidebar.py"
+
+    # Pages module
+    install -dm755 "${pkgdir}/usr/local/lib/kutos-settings/pages"
+    install -Dm644 pages/__init__.py "${pkgdir}/usr/local/lib/kutos-settings/pages/__init__.py"
+    install -Dm644 pages/desktop_env.py "${pkgdir}/usr/local/lib/kutos-settings/pages/desktop_env.py"
+    install -Dm644 pages/system_update.py "${pkgdir}/usr/local/lib/kutos-settings/pages/system_update.py"
+    install -Dm644 pages/about.py "${pkgdir}/usr/local/lib/kutos-settings/pages/about.py"
+
+    # Utils module
+    install -dm755 "${pkgdir}/usr/local/lib/kutos-settings/utils"
+    install -Dm644 utils/__init__.py "${pkgdir}/usr/local/lib/kutos-settings/utils/__init__.py"
+    install -Dm644 utils/downloader.py "${pkgdir}/usr/local/lib/kutos-settings/utils/downloader.py"
+    install -Dm644 utils/updater.py "${pkgdir}/usr/local/lib/kutos-settings/utils/updater.py"
+
+    # Theme
+    install -dm755 "${pkgdir}/usr/local/lib/kutos-settings/theme"
+    install -Dm644 theme/style.css "${pkgdir}/usr/local/lib/kutos-settings/theme/style.css"
+
+    # Launcher script
+    install -Dm755 kutos-settings.sh "${pkgdir}/usr/bin/kutos-settings"
+
+    # Desktop entry
+    install -Dm644 kutos-settings.desktop "${pkgdir}/usr/share/applications/kutos-settings.desktop"
+
+    # Icon (placeholder — replace with actual icon)
+    if [ -f kutos-settings.png ]; then
+        install -Dm644 kutos-settings.png "${pkgdir}/usr/share/icons/hicolor/256x256/apps/kutos-settings.png"
+    fi
+}

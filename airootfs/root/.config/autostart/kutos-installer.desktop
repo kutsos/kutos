@@ -1,12 +1,11 @@
 [Desktop Entry]
-Encoding=UTF-8
-Version=0.9.4
-Type=Application
-Name=KutOS Installer
-Comment=Install KutOS
-Exec=/usr/local/bin/kutos-bootstrapper
-OnlyShowIn=XFCE;
-RunHook=0
-StartupNotify=false
+Name=Install KutOS
+Comment=Install KutOS to your system
+Exec=pkexec calamares
+Icon=/etc/calamares/branding/kutos/logo.png
 Terminal=false
-Hidden=false
+Type=Application
+Categories=System;
+Keywords=install;installer;calamares;kutos;
+StartupNotify=true
+X-GNOME-Autostart-enabled=true

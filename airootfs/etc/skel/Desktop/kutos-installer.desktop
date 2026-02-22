@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=Install KutOS
+Comment=Install KutOS to your system
+Exec=pkexec calamares
+Icon=/etc/calamares/branding/kutos/logo.png
+Terminal=false
+Type=Application
+Categories=System;
+Keywords=install;installer;calamares;kutos;
+StartupNotify=true

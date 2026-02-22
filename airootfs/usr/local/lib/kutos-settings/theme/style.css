@@ -1,0 +1,197 @@
+/* KutOS Settings — Dark Zinc Theme for GTK4 */
+
+/* ── Window ── */
+window {
+    background-color: #09090b;
+    color: #fafafa;
+}
+
+/* ── HeaderBar ── */
+headerbar {
+    background-color: #09090b;
+    border-bottom: 1px solid #18181b;
+    min-height: 46px;
+}
+
+.header-title {
+    font-weight: 700;
+    font-size: 15px;
+    color: #fafafa;
+    letter-spacing: 0.3px;
+}
+
+/* ── Sidebar ── */
+.sidebar {
+    background-color: #0a0a0c;
+    border-right: none;
+}
+
+.sidebar row {
+    padding: 14px 20px;
+    margin: 2px 8px;
+    border-radius: 8px;
+    color: #a1a1aa;
+    transition: all 200ms ease;
+}
+
+.sidebar row:hover {
+    background-color: #18181b;
+    color: #e4e4e7;
+}
+
+.sidebar row:selected {
+    background-color: #1d4ed8;
+    color: #ffffff;
+}
+
+/* ── Separator ── */
+separator {
+    background-color: #18181b;
+    min-width: 1px;
+}
+
+/* ── Page titles ── */
+.page-title {
+    font-size: 26px;
+    font-weight: 800;
+    color: #fafafa;
+    margin-bottom: 6px;
+    letter-spacing: -0.3px;
+}
+
+.page-subtitle {
+    font-size: 14px;
+    color: #71717a;
+    margin-bottom: 10px;
+}
+
+/* ── Desktop Environment cards ── */
+.de-card {
+    background-color: #18181b;
+    border: 1px solid #27272a;
+    border-radius: 12px;
+    padding: 0;
+    transition: all 200ms ease;
+    min-height: 80px;
+}
+
+.de-card:hover {
+    background-color: #1c1c20;
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 1px rgba(59, 130, 246, 0.3);
+}
+
+.de-card:active {
+    background-color: #27272a;
+}
+
+.de-card-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: #fafafa;
+}
+
+.de-card-desc {
+    font-size: 12px;
+    color: #71717a;
+}
+
+/* ── Buttons ── */
+button.suggested-action {
+    background-color: #1d4ed8;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 24px;
+    color: #ffffff;
+    font-weight: 600;
+    font-size: 14px;
+    transition: all 200ms ease;
+}
+
+button.suggested-action:hover {
+    background-color: #2563eb;
+}
+
+button.suggested-action:active {
+    background-color: #1e40af;
+}
+
+button.suggested-action:disabled {
+    background-color: #27272a;
+    color: #52525b;
+}
+
+.update-btn {
+    min-width: 180px;
+}
+
+.link-btn {
+    min-width: 120px;
+}
+
+/* ── Status text ── */
+.status-text {
+    font-size: 14px;
+    color: #a1a1aa;
+}
+
+/* ── Terminal output area ── */
+.output-scroll {
+    background-color: #0c0c0e;
+    border: 1px solid #18181b;
+    border-radius: 10px;
+}
+
+.terminal-output {
+    background-color: #0c0c0e;
+    color: #d4d4d8;
+    font-family: "JetBrains Mono", "Fira Code", "Source Code Pro", monospace;
+    font-size: 12px;
+}
+
+/* ── About page ── */
+.about-icon {
+    opacity: 0.9;
+    color: #3b82f6;
+}
+
+.about-title {
+    font-size: 28px;
+    font-weight: 800;
+    color: #fafafa;
+    letter-spacing: -0.5px;
+}
+
+.about-version {
+    font-size: 14px;
+    color: #3b82f6;
+    font-weight: 600;
+}
+
+.about-distro {
+    font-size: 13px;
+    color: #71717a;
+}
+
+.about-description {
+    font-size: 14px;
+    color: #a1a1aa;
+    line-height: 1.6;
+}
+
+/* ── Spinner ── */
+spinner {
+    color: #3b82f6;
+}
+
+/* ── Scrollbar ── */
+scrollbar slider {
+    background-color: #27272a;
+    border-radius: 4px;
+    min-width: 6px;
+    min-height: 6px;
+}
+
+scrollbar slider:hover {
+    background-color: #3f3f46;
+}

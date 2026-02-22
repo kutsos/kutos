@@ -1,7 +1,7 @@
 [Desktop Entry]
 Name=KutOS Installer
 Comment=Install KutOS to your disk (Net-Installer)
-Exec=/usr/local/bin/kutos-bootstrapper
+Exec=pkexec /usr/local/bin/kutos-bootstrapper
 Icon=system-software-install
 Terminal=false
 Type=Application

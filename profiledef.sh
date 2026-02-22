@@ -25,6 +25,7 @@ file_permissions=(
   ["/usr/local/bin/Installation_guide"]="0:0:755"
   ["/usr/local/bin/livecd-sound"]="0:0:755"
   ["/usr/local/bin/kutos-installer"]="0:0:755"
+  ["/usr/local/bin/kutos-settings"]="0:0:755"
   ["/root/Desktop/kutos-installer.desktop"]="0:0:755"
   ["/root/.config/autostart/kutos-installer.desktop"]="0:0:755"
 )

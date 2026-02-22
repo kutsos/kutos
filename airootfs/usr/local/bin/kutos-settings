@@ -1,0 +1,3 @@
+#!/bin/bash
+# KutOS Settings launcher
+exec python3 /usr/local/lib/kutos-settings/main.py "$@"

@@ -1,0 +1,56 @@
+---
+componentName: kutos
+
+welcomeStyleCalamares: true
+
+strings:
+    productName:        "KutOS"
+    shortProductName:   "KutOS"
+    version:            "2025.1"
+    shortVersion:       "2025.1"
+    versionedName:      "KutOS 2025.1"
+    shortVersionedName: "KutOS 2025.1"
+    bootloaderEntryName: "KutOS"
+    productUrl:         "https://github.com/kutos-linux"
+    supportUrl:         "https://github.com/kutos-linux/issues"
+    knownIssuesUrl:     "https://github.com/kutos-linux/issues"
+    releaseNotesUrl:    "https://github.com/kutos-linux/releases"
+    donateUrl:          "https://github.com/kutos-linux"
+
+images:
+    productLogo:    "logo.png"
+    productIcon:    "logo.png"
+    productWelcome: "welcome.png"
+
+slideshow: "show.qml"
+
+slideshowAPI: 2
+
+style:
+    sidebarBackground:     "#09090b"
+    sidebarText:           "#fafafa"
+    sidebarTextSelect:     "#ffffff"
+    sidebarTextHighlight:  "#3b82f6"
+
+navigation:
+    modules: true
+    panels:  false
+    utilities: false
+
+windowExpanding:     normal
+windowSize:          "900px,600px"
+windowPlacement:     center
+
+sidebar:
+    width: 220
+    visible: true
+
+titles:
+    welcome:    "Welcome"
+    locale:     "Location"
+    keyboard:   "Keyboard"
+    partition:  "Partition"
+    users:      "Users"
+    summary:    "Summary"
+    install:    "Install"
+    finished:   "Finish"
