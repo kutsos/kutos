@@ -52,7 +52,32 @@ fi
 # Create output directory
 mkdir -p "$OUT_DIR"
 
-# Build ISO
+# ── Go installer derle ────────────────────────────────────────────────
+log "kutos-installer derleniyor (Go + GTK3)..."
+
+if ! command -v go &>/dev/null; then
+    error "Go bulunamadı! sudo pacman -S go"
+    exit 1
+fi
+
+# GTK3 header kontrolü (CGO için gerekli)
+if ! pkg-config --exists gtk+-3.0 2>/dev/null; then
+    error "GTK3 geliştirme başlıkları bulunamadı! sudo pacman -S gtk3"
+    exit 1
+fi
+
+INSTALLER_SRC="${SCRIPT_DIR}/kutos-installer-src"
+INSTALLER_BIN="${SCRIPT_DIR}/airootfs/usr/local/bin/kutos-installer"
+
+(
+    cd "$INSTALLER_SRC"
+    go mod tidy
+    CGO_ENABLED=1 go build -ldflags="-s -w" -o "$INSTALLER_BIN" .
+)
+chmod 755 "$INSTALLER_BIN"
+success "kutos-installer derlendi → ${INSTALLER_BIN}"
+
+# ── ISO Build ─────────────────────────────────────────────────────────
 log "KutOS ISO oluşturuluyor..."
 log "  Profil: ${SCRIPT_DIR}"
 log "  Çalışma dizini: ${WORK_DIR}"

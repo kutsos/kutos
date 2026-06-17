@@ -1,3 +1,6 @@
 #!/bin/bash
-# KutOS Installer Launcher
-exec python3 /usr/local/lib/kutos-installer/main.py "$@"
+# KutOS Installer launcher
+# Bu dosya build.sh tarafından Go binary ile değiştirilir.
+# Eğer hâlâ bu scripti görüyorsanız build.sh çalıştırılmamış demektir.
+echo "Hata: kutos-installer henüz derlenmedi. Lütfen build.sh çalıştırın." >&2
+exit 1

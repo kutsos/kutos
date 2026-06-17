@@ -94,7 +94,6 @@ mesa
 # === XFCE Masaüstü (Live Ortam) ===
 xfce4
 xfce4-goodies
-xorg-xinit
 xfce4-terminal
 thunar
 mousepad

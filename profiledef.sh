@@ -28,4 +28,5 @@ file_permissions=(
   ["/usr/local/bin/kutos-settings"]="0:0:755"
   ["/root/Desktop/kutos-installer.desktop"]="0:0:755"
   ["/root/.config/autostart/kutos-installer.desktop"]="0:0:755"
+  ["/root/Desktop/kutos-settings.desktop"]="0:0:755"
 )
